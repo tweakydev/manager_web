@@ -29,3 +29,4 @@ C:\Users\callum\Documents\GitHub\manager_web\obj\Debug\net9.0\ref\ManagerWeb.dll
 C:\Users\callum\Documents\GitHub\manager_web\bin\Debug\net9.0\websocket-sharp.dll
 C:\Users\callum\Documents\GitHub\manager_web\obj\Debug\net9.0\ManagerWeb.csproj.AssemblyReference.cache
 C:\Users\callum\Documents\GitHub\manager_web\obj\Debug\net9.0\ManagerWeb.csproj.Up2Date
+C:\Users\callum\Documents\GitHub\manager_web\obj\Debug\net9.0\ManagerWeb.sourcelink.json

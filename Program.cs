@@ -18,15 +18,9 @@ app.MapGet("/", () => Results.Content("""
         <script>
             async function clickOpen() {
                 const response = await fetch('/buttonOpen');
-                const text = await response.text();
-
-                alert(text);
             }
             async function clickClose() {
                 const response = await fetch('/buttonClose');
-                const text = await response.text();
-
-                alert(text);
             }
         </script>
     </body>
@@ -50,11 +44,14 @@ public static class WebsocketManager
 {
 
     public static void SendToServer(string msg) {
-        using var ws = new WebSocket("ws://gjrnx.site");
+        using var ws = new WebSocket("wss://gjrnx.site");
 
-        ws.OnMessage += (s, e) => {};
+        ws.SslConfiguration.EnabledSslProtocols =
+            System.Security.Authentication.SslProtocols.Tls12;
 
         ws.Connect();
+
+        ws.Send("name web");
 
         ws.Send(msg);
     }
