@@ -341,18 +341,38 @@ app.MapGet("/buttonClose", () =>
     return Results.Ok();
 });
 
+WebsocketManager.Start();
+
 app.Run("http://localhost:5000");
 
 
 public static class WebsocketManager
 {
-    public static void SendToServer(string msg)
+    private static WebSocket? ws;
+    private static readonly object lockObject = new();
+
+    public static void Start()
     {
-        using var ws = new WebSocket("ws://127.0.0.1:6969");
+        ws = new WebSocket("ws://127.0.0.1:6969");
 
         ws.Connect();
 
         ws.Send("name web");
-        ws.Send(msg);
+
+        Console.WriteLine("Connected to WebSocket server as web");
+    }
+
+    public static void SendToServer(string msg)
+    {
+        lock (lockObject)
+        {
+            if (ws == null || ws.ReadyState != WebSocketState.Open)
+            {
+                Console.WriteLine("WebSocket is not connected.");
+                return;
+            }
+
+            ws.Send(msg);
+        }
     }
 }
